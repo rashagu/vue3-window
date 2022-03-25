@@ -145,7 +145,9 @@ const defaultItemKey = (index: number, data: any) => index;
 // This avoids spamming the console every time a render happens.
 let devWarningsDirection: any = null;
 let devWarningsTagName: any = null;
-if (import.meta.env.DEV) {
+
+// import.meta.env.DEV
+if (false) {
   if (typeof window !== 'undefined' && typeof window.WeakSet !== 'undefined') {
     devWarningsDirection = new WeakSet();
     devWarningsTagName = new WeakSet();
@@ -212,7 +214,7 @@ export default function createListComponent({
         default: false,
       },
     },
-    setup: (props, {slots}) => {
+    setup: (props, {slots, expose}) => {
       let _instanceProps: any = initInstanceProps(props as any, {});
       let _outerRef: HTMLDivElement;
       let _resetIsScrollingTimeoutId: TimeoutID | null = null;
@@ -513,7 +515,9 @@ export default function createListComponent({
           );
         }
       }
-
+      expose({
+        scrollToItem
+      })
       onMounted(() => {
         const {direction, initialScrollOffset, layout} = props;
 
@@ -579,7 +583,7 @@ export default function createListComponent({
 
 
       return () => {
-        const children = slots.default ? slots.default() : null
+        // const children = slots.default ? slots.default() : null
         const {
           className,
           direction,
@@ -681,7 +685,9 @@ const validateSharedProps = (
   }: Props<any>,
   {instance}: State
 ): void => {
-  if (import.meta.env.DEV) {
+
+  // import.meta.env.DEV
+  if (false) {
     if (innerTagName != null || outerTagName != null) {
       if (devWarningsTagName && !devWarningsTagName.has(instance)) {
         devWarningsTagName.add(instance);

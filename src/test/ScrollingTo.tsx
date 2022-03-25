@@ -18,13 +18,13 @@ const ScrollingTo = defineComponent<ExampleProps>((props, {slots}) => {
   );
   const listRef = ref<any>(null)
   const scrollToRow200Auto = () => {
-    listRef.value.scrollToItem(200);
+    listRef.value?.scrollToItem(200);
   };
   const scrollToRow250Smart = () => {
-    listRef.value.scrollToItem(250, 'smart');
+    listRef.value?.scrollToItem(250, 'smart');
   };
   const scrollToRow300Center = () => {
-    listRef.value.scrollToItem(300, 'center');
+    listRef.value?.scrollToItem(300, 'center');
   };
   return () => (
     <div>

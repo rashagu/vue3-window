@@ -116,7 +116,9 @@ const FixedSizeList = createListComponent({
   shouldResetStyleCacheOnItemSizeChange: true,
 
   validateProps: ({ itemSize }: Props<any>): void => {
-    if (import.meta.env.DEV) {
+
+    // import.meta.env.DEV
+    if (false) {
       if (typeof itemSize !== 'number') {
         throw Error(
           'An invalid "itemSize" prop has been specified. ' +

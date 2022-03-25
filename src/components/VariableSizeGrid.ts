@@ -483,7 +483,9 @@ const VariableSizeGrid = createGridComponent({
   shouldResetStyleCacheOnItemSizeChange: false,
 
   validateProps: ({ columnWidth, rowHeight }: Props<any>): void => {
-    if (import.meta.env.DEV) {
+
+    // import.meta.env.DEV
+    if (false) {
       if (typeof columnWidth !== 'function') {
         throw Error(
           'An invalid "columnWidth" prop has been specified. ' +

@@ -297,7 +297,9 @@ const VariableSizeList = createListComponent({
   shouldResetStyleCacheOnItemSizeChange: false,
 
   validateProps: ({ itemSize }: Props<any>): void => {
-    if (import.meta.env.DEV) {
+
+    // import.meta.env.DEV
+    if (false) {
       if (typeof itemSize !== 'function') {
         throw Error(
           'An invalid "itemSize" prop has been specified. ' +

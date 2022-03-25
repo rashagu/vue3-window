@@ -143,7 +143,8 @@ const defaultItemKey = ({columnIndex, data, rowIndex}: any) => `${rowIndex}:${co
 let devWarningsOverscanCount: any = null;
 let devWarningsOverscanRowsColumnsCount: any = null;
 let devWarningsTagName: any = null;
-if (import.meta.env.DEV) {
+// import.meta.env.DEV
+if (false) {
   if (typeof window !== 'undefined' && typeof window.WeakSet !== 'undefined') {
     devWarningsOverscanCount = new WeakSet();
     devWarningsOverscanRowsColumnsCount = new WeakSet();
@@ -233,7 +234,7 @@ export default function createGridComponent({
         default: false,
       },
     },
-    setup: (props, {slots}) => {
+    setup: (props, {slots, expose}) => {
       let _instanceProps: any = initInstanceProps(props as any, {});
       let _outerRef: HTMLDivElement;
       let _resetIsScrollingTimeoutId: TimeoutID | null = null;
@@ -667,6 +668,11 @@ export default function createGridComponent({
         });
       }
 
+
+      expose({
+        scrollToItem
+      })
+
       onMounted(() => {
         const {initialScrollLeft, initialScrollTop} = props;
 
@@ -838,7 +844,8 @@ const validateSharedProps = (
   }: Props<any>,
   {instance}: State
 ): void => {
-  if (import.meta.env.DEV) {
+  // import.meta.env.DEV
+  if (false) {
     if (typeof overscanCount === 'number') {
       if (devWarningsOverscanCount && !devWarningsOverscanCount.has(instance)) {
         devWarningsOverscanCount.add(instance);

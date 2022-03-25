@@ -1,23 +1,44 @@
 {
-  "name": "vue-window",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@kousum/vue3-window",
+  "private": false,
+  "version": "0.0.2",
+  "main": "src/components/index.ts",
+  "module": "src/components/index.ts",
+  "files": [
+    "src/components/",
+    "src/test/"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:lib": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json",
+    "test": "jest"
   },
   "dependencies": {
     "@babel/runtime": "^7.17.8",
     "memoize-one": "^6.0.0",
-    "sass": "^1.49.9",
-    "vue": "^3.2.25"
+    "vue": "^3.2.31"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^2.2.0",
+    "@types/jest": "^27.4.1",
+    "@types/node": "^16.11.26",
+    "@vitejs/plugin-vue": "^2.2.4",
     "@vitejs/plugin-vue-jsx": "^1.3.8",
-    "typescript": "^4.5.4",
-    "vite": "^2.8.0",
-    "vue-tsc": "^0.29.8"
+    "@vue/test-utils": "^2.0.0-rc.18",
+    "@vue/vue3-jest": "^27.0.0-alpha.4",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.5.1",
+    "sass": "^1.49.9",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^27.1.3",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.2",
+    "vite": "^2.8.6",
+    "vue-tsc": "^0.33.7"
   }
 }

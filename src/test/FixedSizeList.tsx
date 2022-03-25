@@ -7,7 +7,7 @@ interface ExampleProps {
 export const vuePropsType = {
   name: String
 }
-const Test = defineComponent<ExampleProps>((props, {slots}) => {
+const FixedSizeList = defineComponent<ExampleProps>((props, {slots}) => {
   const Row = (p:{index:number, style:any}) => (
     <div  style={p?.style}>Row {JSON.stringify(p?.index)}</div>
   );
@@ -43,7 +43,7 @@ const Test = defineComponent<ExampleProps>((props, {slots}) => {
   )
 })
 
-Test.props = vuePropsType
+FixedSizeList.props = vuePropsType
 
-export default Test
+export default FixedSizeList
 
