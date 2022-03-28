@@ -13,6 +13,7 @@ npm install --save vue3-window
 ```
 
 ## demo
+> 用法参考 [https://react-window.vercel.app/](https://react-window.vercel.app/)
 ```
 <script setup>
 import { FixedSizeList as List } from '@kousum/vue3-window';
