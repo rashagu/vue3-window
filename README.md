@@ -6,10 +6,10 @@
 
 ```bash
 # Yarn
-yarn add vue3-window
+yarn add @kousum/vue3-window
 
 # NPM
-npm install --save vue3-window
+npm install --save @kousum/vue3-window
 ```
 
 ## demo
