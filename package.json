@@ -1,7 +1,7 @@
 {
   "name": "@kousum/vue3-window",
   "private": false,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "src/components/index.ts",
   "module": "src/components/index.ts",
   "files": [

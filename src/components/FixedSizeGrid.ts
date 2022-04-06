@@ -2,6 +2,7 @@
 
 import createGridComponent from './createGridComponent';
 import type { Props, ScrollToAlign } from './createGridComponent';
+import {h} from "vue"
 
 const FixedSizeGrid = createGridComponent({
   getColumnOffset: ({ columnWidth }: Props<any>, index: number): number =>

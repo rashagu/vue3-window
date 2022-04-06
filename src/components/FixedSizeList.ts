@@ -1,6 +1,7 @@
 // @flow
 
 import createListComponent from './createListComponent';
+import {h} from "vue"
 
 import type { Props, ScrollToAlign } from './createListComponent';
 const getOffsetForIndexAndAlignment = (

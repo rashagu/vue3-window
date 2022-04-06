@@ -212,7 +212,7 @@ export default function createGridComponent({
       outerElementType: String,
       outerTagName: String,
       style: [Object],
-      width: Number,
+      width: [Number, String],
       direction: {
         type: String,
         default: 'ltr',
