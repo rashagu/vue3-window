@@ -11,9 +11,10 @@ import {
   watchEffect
 } from 'vue';
 import {cancelTimeout, requestTimeout} from './timer';
-import {getRTLOffsetType} from './domHelpers';
+import { getScrollbarSize, getRTLOffsetType } from './domHelpers';
 
 import type {TimeoutID} from './timer';
+import {CSSDirection} from "./createGridComponent";
 
 export type ScrollToAlign = 'auto' | 'smart' | 'center' | 'start' | 'end';
 
@@ -30,7 +31,7 @@ type RenderComponentProps<T> = {
 };
 type RenderComponent<T> = any;
 
-type ScrollDirection = 'forward' | 'backward';
+export type ScrollDirection = 'forward' | 'backward';
 
 type onItemsRenderedCallback = ({
                                   overscanStartIndex,
@@ -75,7 +76,7 @@ type InnerProps = {
 export type Props<T> = {
   children: RenderComponent<T>,
   className?: string,
-  direction: Direction,
+  direction: Direction | CSSDirection,
   height: number | string,
   initialScrollOffset?: number,
   innerRef?: any,
@@ -121,7 +122,8 @@ type GetOffsetForIndexAndAlignment = (
   index: number,
   align: ScrollToAlign,
   scrollOffset: number,
-  instanceProps: any
+  instanceProps: any,
+  scrollbarSize: number
 ) => number;
 type GetStartIndexForOffset = (
   props: Props<any>,
@@ -498,8 +500,28 @@ export default function createListComponent({
       }
 
       function scrollToItem(index: number, align: ScrollToAlign = 'auto'): void {
-        const {itemCount} = props;
+        const {itemCount, layout} = props;
         const {scrollOffset} = state;
+
+
+        // The scrollbar size should be considered when scrolling an item into view, to ensure it's fully visible.
+        // But we only need to account for its size when it's actually visible.
+        // This is an edge case for lists; normally they only scroll in the dominant direction.
+        let scrollbarSize = 0;
+        if (_outerRef) {
+          const outerRef = _outerRef;
+          if (layout === 'vertical') {
+            scrollbarSize =
+              outerRef.scrollWidth > outerRef.clientWidth
+                ? getScrollbarSize()
+                : 0;
+          } else {
+            scrollbarSize =
+              outerRef.scrollHeight > outerRef.clientHeight
+                ? getScrollbarSize()
+                : 0;
+          }
+        }
 
         if (itemCount) {
           index = Math.max(0, Math.min(index, itemCount - 1));
@@ -510,7 +532,8 @@ export default function createListComponent({
               index,
               align,
               scrollOffset,
-              _instanceProps
+              _instanceProps,
+              scrollbarSize
             )
           );
         }

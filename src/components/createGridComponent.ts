@@ -7,6 +7,8 @@ import {getScrollbarSize, getRTLOffsetType} from './domHelpers';
 
 import type {TimeoutID} from './timer';
 
+
+export type CSSDirection = "ltr" | "rtl";
 type Direction = 'ltr' | 'rtl';
 export type ScrollToAlign = 'auto' | 'smart' | 'center' | 'start' | 'end';
 
@@ -21,7 +23,7 @@ type RenderComponentProps<T> = {
 };
 export type RenderComponent<T> = any;
 
-type ScrollDirection = 'forward' | 'backward';
+export type ScrollDirection = 'forward' | 'backward';
 
 type OnItemsRenderedCallback = (arg: {
   overscanColumnStartIndex: number,
@@ -65,7 +67,7 @@ export type Props<T> = {
   className?: string,
   columnCount: number,
   columnWidth: itemSize,
-  direction: Direction,
+  direction: Direction | CSSDirection,
   height: number,
   initialScrollLeft?: number,
   initialScrollTop?: number,

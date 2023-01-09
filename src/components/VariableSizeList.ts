@@ -182,7 +182,8 @@ const VariableSizeList = createListComponent({
     index: number,
     align: ScrollToAlign,
     scrollOffset: number,
-    instanceProps: InstanceProps
+    instanceProps: InstanceProps,
+    scrollbarSize: number
   ): number => {
     const { direction, height, layout, width } = props;
 
@@ -201,7 +202,7 @@ const VariableSizeList = createListComponent({
     );
     const minOffset = Math.max(
       0,
-      itemMetadata.offset - size + itemMetadata.size
+      itemMetadata.offset - size + itemMetadata.size + scrollbarSize
     );
 
     if (align === 'smart') {

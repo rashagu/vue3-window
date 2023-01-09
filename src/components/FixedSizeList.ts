@@ -4,11 +4,14 @@ import createListComponent from './createListComponent';
 import {h} from "vue"
 
 import type { Props, ScrollToAlign } from './createListComponent';
+type InstanceProps = any;
 const getOffsetForIndexAndAlignment = (
   { direction, height, itemCount, itemSize, layout, width }: Props<any>,
   index: number,
   align: ScrollToAlign,
-  scrollOffset: number
+  scrollOffset: number,
+  instanceProps: InstanceProps,
+  scrollbarSize: number
 ): number => {
   // TODO Deprecate direction "horizontal"
   const isHorizontal = direction === 'horizontal' || layout === 'horizontal';
@@ -23,7 +26,10 @@ const getOffsetForIndexAndAlignment = (
   );
   const minOffset = Math.max(
     0,
-    index * (itemSize as number) - size + (itemSize as number)
+    index * (itemSize as number) -
+    size +
+    (itemSize as number) +
+    scrollbarSize
   );
 
   if (align === 'smart') {

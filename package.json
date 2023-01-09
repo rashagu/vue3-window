@@ -22,7 +22,10 @@
   "dependencies": {
     "@babel/runtime": "^7.17.8",
     "memoize-one": "^6.0.0",
-    "vue": "^3.2.41"
+    "vue": "^3.2.45"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.45"
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",
