@@ -13,6 +13,11 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": [
+    "src/components/**/*.ts",
+    "src/components/**/*.d.ts",
+    "src/components/**/*.tsx",
+    "src/components/**/*.vue"
+  ],
   "exclude": ["**/*.spec.ts", "dist"]
 }

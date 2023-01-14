@@ -1,10 +1,12 @@
 {
   "name": "@kousum/vue3-window",
   "private": false,
-  "version": "0.0.4",
-  "main": "src/components/index.ts",
-  "module": "src/components/index.ts",
+  "version": "0.0.6",
+  "main": "dist/index.mjs",
+  "module": "dist/index.mjs",
+  "types": "dist/types/index.d.ts",
   "files": [
+    "dist",
     "src/components/",
     "src/test/"
   ],
@@ -14,9 +16,10 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "build:lib": "vue-tsc --noEmit && rimraf lib && tsc -b --force tsconfig.esm.json",
+    "rm:dist": "rimraf dist",
+    "tsc": "tsc -b --force tsconfig.build.json",
+    "build": "pnpm rm:dist && vue-tsc --noEmit && vite build && tsc -b --force tsconfig.build.json",
     "test": "jest"
   },
   "dependencies": {

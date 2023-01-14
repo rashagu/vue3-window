@@ -183,15 +183,15 @@ export default function createListComponent({
       height: Number,
       initialScrollOffset: Number,
       innerRef: Object,
-      innerElementType: String,
+      innerElementType: [String, Object, Function],
       innerTagName: String,
       itemCount: Number,
       itemKey: Function,
       itemSize: [Number, Function],
       onItemsRendered: Function,
       onScroll: Function,
-      outerRef: Object,
-      outerElementType: String,
+      outerRef: [Object, Function],
+      outerElementType: [String, Object, Function],
       outerTagName: String,
       style: [Object],
       width: [Number, String],
@@ -353,7 +353,6 @@ export default function createListComponent({
         if (itemCount === 0) {
           return [0, 0, 0, 0];
         }
-
 
         const startIndex = getStartIndexForOffset(
           props as any,
@@ -636,7 +635,7 @@ export default function createListComponent({
 
         const [startIndex, stopIndex] = _getRangeToRender();
 
-        const items = [];
+        const items:VNode[] = [];
         if (itemCount && itemCount > 0) {
           for (let index = startIndex; index <= stopIndex; index++) {
             let props_ = {
@@ -659,8 +658,16 @@ export default function createListComponent({
           _instanceProps
         );
 
+        const inner = [createElement(innerElementType || innerTagName || 'div', {
+          ref: () => innerRef ? innerRef.value : undefined,
+          style: {
+            height: isHorizontal ? '100%' : estimatedTotalSize + 'px',
+            pointerEvents: isScrolling ? 'none' : undefined,
+            width: isHorizontal ? estimatedTotalSize + 'px' : '100%',
+          },
+        }, typeof (innerElementType || innerTagName || 'div') === 'string'?items:()=>items)]
         return createElement(
-          outerElementType || outerTagName || 'div',
+          (outerElementType || outerTagName || 'div') as any,
           {
             className,
             onScroll,
@@ -676,14 +683,7 @@ export default function createListComponent({
               ...style,
             },
           },
-          createElement(innerElementType || innerTagName || 'div', {
-            ref: () => innerRef ? innerRef.value : undefined,
-            style: {
-              height: isHorizontal ? '100%' : estimatedTotalSize + 'px',
-              pointerEvents: isScrolling ? 'none' : undefined,
-              width: isHorizontal ? estimatedTotalSize + 'px' : '100%',
-            },
-          }, items)
+          typeof (outerElementType || outerTagName || 'div') === 'string'?inner:()=>inner
         );
       }
     }
